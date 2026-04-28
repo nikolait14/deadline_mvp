@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>X5 Group — Апельсин | Пятёрочка | Перекрёсток</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #F2F2F7;
+            overflow-x: hidden;
+        }
+
+        /* Главный контейнер — как экран телефона */
+        .app-screen {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* ===== ХЕДЕР ===== */
+        .header {
+            background: #FFFFFF;
+            padding: 12px 16px 8px;
+            border-bottom: 0.5px solid #E9E9EF;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .logo-x5 {
+            font-weight: 700;
+            font-size: 20px;
+            color: #1A1A1A;
+        }
+
+        .logo-x5 span {
+            color: #FF6A22;
+        }
+
+        .badge {
+            background: #F2F2F7;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 16px;
+            color: #FF6A22;
+            font-size: 20px;
+        }
+
+        /* Адресная строка как в приложении */
+        .address-bar {
+            background: #F8F8FC;
+            padding: 10px 12px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #1A1A1A;
+        }
+
+        .address-icon {
+            font-size: 16px;
+        }
+
+        .address-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        /* ===== КАРТА АПЕЛЬСИН ===== */
+        .apelsin-card {
+            background: linear-gradient(135deg, #FF8C42 0%, #FF5E1A 100%);
+            margin: 16px;
+    border-radius: 28px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 8px 24px rgba(255, 94, 26, 0.25);
+    transition: all 0.2s;
+}
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+        .card-brand span:first-child {
+            font-size: 28px;
+        }
+
+        .card-chip {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+
+        .card-balance {
+            margin-bottom: 20px;
+        }
+
+        .balance-label {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+        .balance-value {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .balance-value small {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .card-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+        .card-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.1s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .card-btn:active {
+            background: rgba(255,255,255,0.35);
+        }
+
+        .card-footer {
+            font-size: 11px;
+            opacity: 0.75;
+            display: flex;
+            justify-content: space-between;
+            border-top: 0.5px solid rgba(255,255,255,0.3);
+            padding-top: 12px;
+        }
+
+        /* QR-код Апельсин Пэй — ключевая фишка */
+        .qr-section {
+            margin: 0 16px 20px;
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .qr-code {
+            width: 70px;
+            height: 70px;
+            background: #1A1A1A;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .qr-info {
+            flex: 1;
+        }
+
+        .qr-title {
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .qr-title .badge-new {
+            background: #FF6A22;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .qr-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* ===== ТАБЫ (секции) ===== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: #FFFFFF;
+            padding: 0 16px 12px;
+            border-bottom: 0.5px solid #E9E9EF;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: 600;
+            font-size: 15px;
+            color: #8E8E93;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 12px;
+        }
+
+        .tab.active {
+            color: #FF6A22;
+            background: #FFF5ED;
+        }
+        /* ===== СЕКЦИИ КОНТЕНТА (Пятёрочка / Перекрёсток / Партнёры / Чижик) ===== */
+        .section {
+            display: none;
+            padding: 16px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Карточки товаров / акций как в приложении */
+        .promo-card {
+            background: #F8F8FC;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .promo-icon {
+            width: 52px;
+            height: 52px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .promo-content {
+            flex: 1;
+        }
+
+        .promo-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .promo-desc {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .promo-badge {
+            background: #FF6A22;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Список покупок / корзина */
+        .shopping-list {
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: 1px solid #EFEFF4;
+            margin-bottom: 16px;
+        }
+
+        .list-header {
+            padding: 14px 16px;
+            font-weight: 700;
+            border-bottom: 1px solid #EFEFF4;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-item {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .item-name {
+            font-weight: 500;
+        }
+
+        .item-price {
+            color: #FF6A22;
+            font-weight: 600;
+        }
+
+        /* Фишка "Шпионский клуб" и "Любимые категории" */
+        .feature-card {
+            background: linear-gradient(135deg, #FEF9F0, #FFF5ED);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Чижик (отдельная зона) */
+        .chizhik-banner {
+            background: #EFF7F0;
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            color: #2C7A47;
+        }
+
+        .footer-nav {
+            background: #FFFFFF;
+            border-top: 0.5px solid #E9E9EF;
+            padding: 10px 20px 20px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .footer-item {
+            text-align: center;
+            font-size: 12px;
+            color: #8E8E93;
+        }
+    </style>
+</head>
+<body>
+<div class="app-screen">
+    <!-- Хедер -->
+    <div class="header">
+        <div class="header-top">
+            <div class="logo-area">
+                <span class="logo-x5">X5 <span>GROUP</span></span>
+                <span class="badge">Апельсин</span>
+            </div>
+            <div class="header-icons">
+                <span>🔔</span>
+                <span>👤</span>
+            </div>
+        </div>
+        <div class="address-bar">
+            <span class="address-icon">📍</span>
+            <span class="address-text">Москва, ул. Ленина, 5</span>
+            <span>⌵</span>
+        </div>
+    </div>
+
+    <!-- КАРТА АПЕЛЬСИН (оригинальный дизайн) -->
+    <div class="apelsin-card" id="apelsinCard">
+        <div class="card-header">
+            <div class="card-brand">
+                <span>🍊</span> 
+                <span>Апельсин-карта</span>
+            </div>
+            <div class="card-chip">💳</div>
+        </div>
+        <div class="card-balance">
+            <div class="balance-label">Баланс бонусов</div>
+            <div class="balance-value" id="balanceValue">1 250 <small>🍊</small></div>
+        </div>
+        <div class="card-actions">
+            <button class="card-btn" id="earnBtn">➕ Накопить</button>
+            <button class="card-btn" id="spendBtn">➖ Списать</button>
+        </div>
+        <div class="card-footer">
+            <span>Кешбэк 7% в Пятёрочке и Перекрёстке</span>
+            <span>⚡ до 11% c Пакет</span>
+        </div>
+    </div>
+
+    <!-- QR-код Апельсин Пэй (новая фишка из новостей) -->
+    <div class="qr-section">
+        <div class="qr-code">🍊</div>
+        <div class="qr-info">
+            <div class="qr-title">
+                Апельсин Пэй 
+                <span class="badge-new">Новинка</span>
+            </div>
+            <div class="qr-desc">Оплата по QR-коду • Кешбэк и бонусы в 1 касание</div>
+        </div>
+        <span style="font-size: 20px;">›</span>
+    </div>
+
+    <!-- ТАБЫ (4 раздела) -->
+    <div class="tabs">
+        <div class="tab active" data-section="pyat">Пятёрочка</div>
+        <div class="tab" data-section="perek">Перекрёсток</div>
+        <div class="tab" data-section="partners">Партнёры</div>
+        <div class="tab" data-section="chizhik">Чижик</div>
+    </div>
+
+    <!-- КОНТЕНТ: Пятёрочка -->
+    <div id="pyat-section" class="section active-section">
+        <div class="promo-card">
+            <div class="promo-icon">🍒</div>
+            <div class="promo-content">
+                <div class="promo-title">+5 🍊 за каждый чек от 500₽</div>
+                <div class="promo-desc">Акция до 31 мая</div>
+            </div>
+            <div class="promo-badge">Клуб Выручайка</div>
+        </div>
+
+        <!-- Шпионский клуб (фишка приложения Пятёрочка) -->
+        <div class="feature-card">
+            <div>
+                <div style="font-weight: 700;">🕵️ Шпионский клуб</div>
+                <div style="font-size: 13px; color: #666;">Оцените магазин и получите +50🍊</div>
+            </div>
+            <button class="card-btn" style="background:#FF6A22; color:white; padding: 8px 16px;">Задание</button>
+        </div>
+
+        <div class="shopping-list">
+            <div class="list-header">
+                <span>📝 Список покупок</span>
+                <span style="color:#FF6A22;">+ добавить</span>
+            </div>
+            <div class="list-item">
+                <span class="item-name">🥛 Молоко Простоквашино</span>
+                <span class="item-price">79 ₽</span>
+            </div>
+            <div class="list-item">
+                <span class="item-name">🍞 Хлеб Бородинский</span>
+                <span class="item-price">45 ₽</span>
+            </div>
+            <div class="list-item">
+                <span class="item-name">🧀 Сыр Российский</span>
+                <span class="item-price">299 ₽</span>
+            </div>
+        </div>
+
+        <div class="promo-card">
+            <div class="promo-icon">⭐</div>
+            <div class="promo-content">
+                <div class="promo-title">Любимые категории</div>
+                <div class="promo-desc">20% кешбэка бонусами</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КОНТЕНТ: Перекрёсток -->
+    <div id="perek-section" class="section">
+        <div class="promo-card">
+            <div class="promo-icon">🥐</div>
+            <div class="promo-content">
+                <div class="promo-title">Доставка за 30 минут</div>
+                <div class="promo-desc">Персональные купоны в Клубе</div>
+            </div>
+        </div>
+
+        <!-- Карта Клуба Перекрёсток -->
+        <div class="feature-card" style="background: #EFF2FF;">
+            <div>
+                <div style="font-weight: 700;">💚 Клуб Перекрёсток</div>
+                <div style="font-size: 13px;">Ваш кешбэк: 340 баллов</div>
+            </div>
+            <span>🗂️</span>
+        </div>
+
+        <!-- Товары со скидкой -->
+        <div class="shopping-list">
+            <div class="list-header">
+                <span>🔥 Скидка недели</span>
+                <span>-30%</span>
+            </div>
+            <div class="list-item">
+                <span>🍣 Роллы Филадельфия</span>
+                <span class="item-price">499 ₽</span>
+            </div>
+            <div class="list-item">
+                <span>🍣 Сет «Перекрёсток»</span>
+                <span class="item-price">899 ₽</span>
+            </div>
+        </div>
+
+        <div class="promo-card">
+            <div class="promo-icon">📱</div>
+            <div class="promo-content">
+                <div class="promo-title">Сканируй и заказывай</div>
+                <div class="promo-desc">Наведи на штрихкод товара → в корзину</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КОНТЕНТ: Партнёры (Аптеки, АЗС, кафе) -->
+    <div id="partners-section" class="section">
+        <div class="promo-card">
+            <div class="promo-icon">💊</div>
+            <div class="promo-content">
+                <div class="promo-title">Аптека Апрель</div>
+                <div class="promo-desc">+3% 🍊 за покупки</div>
+            </div>
+        </div>
+        <div class="promo-card">
+            <div class="promo-icon">⛽</div>
+            <div class="promo-content">
+                <div class="promo-title">АЗС Газпромнефть</div>
+                <div class="promo-desc">Кешбэк 5% апельсинками</div>
+            </div>
+        </div>
+        <div class="promo-card">
+            <div class="promo-icon">☕</div>
+            <div class="promo-content">
+                <div class="promo-title">Кофе Хауз</div>
+                <div class="promo-desc">Двойные бонусы по средам</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КОНТЕНТ: Чижик (Апельсин НЕ ДЕЙСТВУЕТ) -->
+    <div id="chizhik-section" class="section">
+        <div class="chizhik-banner">
+            <span style="font-size: 40px;">🐥</span>
+            <div style="font-weight: 700; margin-top: 8px;">Карта Чижика — отдельная система</div>
+            <div style="font-size: 13px; margin-top: 4px;">Апельсин-бонусы не принимаются</div>
+        </div>
+        <div class="promo-card">
+            <div class="promo-icon">💰</div>
+            <div class="promo-content">
+                <div class="promo-title">Низкие цены каждый день</div>
+                <div class="promo-desc">Скидка по карте до 15%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация как в приложении -->
+    <div class="footer-nav">
+        <div class="footer-item">🏠 Главная</div>
+        <div class="footer-item">🛍️ Каталог</div>
+        <div class="footer-item">❤️ Избранное</div>
+        <div class="footer-item">👤 Профиль</div>
+    </div>
+</div>
+
+<script>
+    // Функционал баланса Апельсина
+    let balance = 1250;
+    const balanceSpan = document.getElementById('balanceValue');
+    function updateBalanceUI() {
+        balanceSpan.innerHTML = balance + ' <small>🍊</small>';
+        localStorage.setItem('apelsin_balance', balance);
+    }
+    document.getElementById('earnBtn')?.addEventListener('click', () => {
+        balance += 100;
+        updateBalanceUI();
+    });
+    document.getElementById('spendBtn')?.addEventListener('click', () => {
+        if (balance >= 50) {
+            balance -= 50;
+            updateBalanceUI();
+        } else {
+            alert('Недостаточно апельсинок 🍊');
+        }
+    });
+    // Восстановление баланса
+    const saved = localStorage.getItem('apelsin_balance');
+    if (saved) { balance = parseInt(saved); updateBalanceUI(); }
+
+    // Переключение между 4 разделами
+    const tabs = document.querySelectorAll('.tab');
+    const sections = {
+        pyat: document.getElementById('pyat-section'),
+        perek: document.getElementById('perek-section'),
+        partners: document.getElementById('partners-section'),
+        chizhik: document.getElementById('chizhik-section')
+    };
+    
+    function switchSection(sectionId) {
+        Object.values(sections).forEach(sec => sec.classList.remove('active-section'));
+        sections[sectionId].classList.add('active-section');
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.getAttribute('data-section') === sectionId) tab.classList.add('active');
+        });
+        // Меняем фон карты Апельсин? В Чижике карта остаётся, но мы добавляем визуальное предупреждение.
+        const apelsinCardDiv = document.getElementById('apelsinCard');
+        if (sectionId === 'chizhik') {
+            apelsinCardDiv.style.opacity = '0.6';
+            apelsinCardDiv.style.filter = 'grayscale(0.1)';
+        } else {
+            apelsinCardDiv.style.opacity = '1';
+            apelsinCardDiv.style.filter = 'none';
+        }
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const sectionId = tab.getAttribute('data-section');
+            switchSection(sectionId);
+        });
+    });
+</script>
+</body>
+</html>
