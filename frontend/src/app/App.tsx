@@ -6,6 +6,7 @@ import { QRPaySection } from "./components/QRPaySection";
 import { StoreTabs } from "./components/StoreTabs";
 import { TabContent } from "./components/TabContent";
 import { BottomNav } from "./components/BottomNav";
+import { PromosScreen } from "./components/PromosScreen";
 
 type TabId = "pyat" | "perek" | "partners" | "chizhik";
 type NavId = "home" | "catalog" | "cart" | "promos" | "profile";
@@ -16,6 +17,7 @@ export default function App() {
   const [activeNav, setActiveNav] = useState<NavId>("home");
 
   const isDimmed = activeTab === "chizhik";
+  const isPromosNav = activeNav === "cart";
 
   return (
     <div
@@ -53,19 +55,25 @@ export default function App() {
             background: "#F8F8FC",
           }}
         >
-          {/* Card zone – white bg */}
-          <div style={{ background: "white" }}>
-            <ApelsinCard
-              balance={balance}
-              setBalance={setBalance}
-              dimmed={isDimmed}
-            />
-            <QRPaySection />
-            <StoreTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
+          {!isPromosNav ? (
+            <>
+              {/* Card zone – white bg */}
+              <div style={{ background: "white" }}>
+                <ApelsinCard
+                  balance={balance}
+                  setBalance={setBalance}
+                  dimmed={isDimmed}
+                />
+                <QRPaySection />
+                <StoreTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+              </div>
 
-          {/* Tab content */}
-          <TabContent activeTab={activeTab} />
+              {/* Tab content */}
+              <TabContent activeTab={activeTab} />
+            </>
+          ) : (
+            <PromosScreen />
+          )}
         </div>
 
         <BottomNav activeNav={activeNav} setActiveNav={setActiveNav} />

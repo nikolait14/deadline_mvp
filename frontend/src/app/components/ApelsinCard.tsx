@@ -1,5 +1,8 @@
 import { CreditCard, Plus, Minus, QrCode, ChevronRight, Zap } from "lucide-react";
 
+const APELSIN_LOGO_DATA_URL =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAP1BMVEX//wD2YQD1YQD3YQD3YAD4YQD3YQD3YQD3XQD3YAD3YQD5kk/93Mf7rHn///74dB//8+v9zq/4hDr7upD5eypJIxdJAAAACnRSTlMAIna83u3zkv4gcShIkwAAAL5JREFUOMutk8kCwiAMRMMSGoPY9f+/1da2QqiGg86RPMKSGYBVxjqPgQsF9M4aOGSRPwrtXu/4q7rXfla09jCoAWj0BlsLpwMOvA54QB1ACDoQgH8E+G8AUV04V3aA4v2iSCWQHhclAcQrIDv0Q10fehKXHGtgJPmKqQYmCTDNsj7T+dXvYYlDxjyLPO6ix1yMOxtm/a1je6TCMIXliJeYUlyYSstZOYBN0rQN29/awWlHrx3eM/7hfTsKOf5Pp6onNCM5mToAAAAASUVORK5CYII=";
+
 interface ApelsinCardProps {
   balance: number;
   setBalance: (b: number) => void;
@@ -58,8 +61,8 @@ export function ApelsinCard({ balance, setBalance, dimmed }: ApelsinCardProps) {
           <div className="flex items-center gap-2">
             <div
               style={{
-                width: "36px",
-                height: "36px",
+                width: "40px",
+                height: "40px",
                 background: "rgba(255,255,255,0.2)",
                 borderRadius: "12px",
                 display: "flex",
@@ -67,12 +70,11 @@ export function ApelsinCard({ balance, setBalance, dimmed }: ApelsinCardProps) {
                 justifyContent: "center",
               }}
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="10" r="9" fill="white" opacity="0.9" />
-                <circle cx="7" cy="8.5" r="3.5" fill="#FF6A22" />
-                <circle cx="13" cy="8.5" r="3.5" fill="#FF8C42" />
-                <circle cx="10" cy="13" r="3.5" fill="#FFB347" />
-              </svg>
+              <img
+                src={APELSIN_LOGO_DATA_URL}
+                alt="Лого Апельсина"
+                style={{ width: "26px", height: "26px", objectFit: "contain" }}
+              />
             </div>
             <div>
               <span style={{ color: "white", fontSize: "16px", fontWeight: 700, letterSpacing: "-0.3px" }}>

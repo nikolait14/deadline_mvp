@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Home, ShoppingBag, Heart, User, Tag } from "lucide-react";
+import { Home, ShoppingBag, ShoppingCart, User, Tag } from "lucide-react";
 
 type NavId = "home" | "catalog" | "cart" | "promos" | "profile";
 
@@ -45,8 +45,8 @@ const NAV_ITEMS: { id: NavId; icon: (active: boolean) => ReactNode; label: strin
   },
   {
     id: "promos",
-    icon: (active) => <Heart size={22} color={active ? "#FF6A22" : "#8E8E93"} />,
-    label: "Избранное",
+    icon: (active) => <ShoppingCart size={22} color={active ? "#FF6A22" : "#8E8E93"} />,
+    label: "Корзина",
   },
   {
     id: "profile",

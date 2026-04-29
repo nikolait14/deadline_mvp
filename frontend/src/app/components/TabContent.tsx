@@ -1,4 +1,4 @@
-import { ShoppingCart, Star, Shield, Eye, Heart, ChevronRight, Scan, Truck, Tag, Pill, Fuel, Coffee, ListChecks, Plus } from "lucide-react";
+import { ShoppingCart, Star, ChevronRight, Scan, Truck, Tag, Sparkles, Gift, Gamepad2, Coffee, Users } from "lucide-react";
 
 type TabId = "pyat" | "perek" | "partners" | "chizhik";
 
@@ -6,13 +6,10 @@ interface TabContentProps {
   activeTab: TabId;
 }
 
-const TOMATO_IMG = "https://images.unsplash.com/photo-1772910206934-0db24c87c4b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHJlZCUyMHRvbWF0b2VzJTIwZ3JvY2VyeXxlbnwxfHx8fDE3NzczNjk4NTJ8MA&ixlib=rb-4.1.0&q=80&w=400";
-const STRAWBERRY_IMG = "https://images.unsplash.com/photo-1575980541474-bf9e64967d55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHN0cmF3YmVycmllcyUyMHJlZCUyMGZydWl0fGVufDF8fHx8MTc3NzM2OTg1Mnww&ixlib=rb-4.1.0&q=80&w=400";
-const CUCUMBER_IMG = "https://images.unsplash.com/photo-1725369865895-0dd4566c8864?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMGN1Y3VtYmVycyUyMHZlZ2V0YWJsZXN8ZW58MXx8fHwxNzc3MzY5ODUyfDA&ixlib=rb-4.1.0&q=80&w=400";
-const CHIPS_IMG = "https://images.unsplash.com/photo-1613919113640-25732ec5e61f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3RhdG8lMjBjaGlwcyUyMHNuYWNrJTIwZm9vZHxlbnwxfHx8fDE3NzczNjk4NTJ8MA&ixlib=rb-4.1.0&q=80&w=400";
-const BLUEBERRY_IMG = "https://images.unsplash.com/photo-1584459853781-6e4ed51deebf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibHVlYmVycmllcyUyMGZyZXNoJTIwYmVycmllc3xlbnwxfHx8fDE3NzczNjk4NTV8MA&ixlib=rb-4.1.0&q=80&w=400";
-const PHARMACY_IMG = "https://images.unsplash.com/photo-1596522016734-8e6136fe5cfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaGFybWFjeSUyMG1lZGljaW5lJTIwZHJ1Z3N0b3JlfGVufDF8fHx8MTc3NzM2OTg1NXww&ixlib=rb-4.1.0&q=80&w=400";
-const COFFEE_IMG = "https://images.unsplash.com/photo-1755444037036-8b645780326f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXAlMjBlc3ByZXNzbyUyMHNob3B8ZW58MXx8fHwxNzc3MzY5ODU1fDA&ixlib=rb-4.1.0&q=80&w=400";
+const COFFEE_BANNER_IMG = "https://images.unsplash.com/photo-1521017432531-fbd92d768814?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900";
+const ALFA_BANK_LOGO = "/items/partners/alfa-main.png";
+const ALFA_STRAH_LOGO = "/items/partners/alfa-strah.png";
+const BEELINE_LOGO = "/items/partners/beeline.jpg";
 
 function SectionTitle({ title, action }: { title: string; action?: string }) {
   return (
@@ -57,6 +54,8 @@ function ProductCard({
         flexShrink: 0,
         boxShadow: "0 1px 8px rgba(0,0,0,0.06)",
         border: "1px solid #F0F0F0",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <div style={{ position: "relative", marginBottom: "8px" }}>
@@ -97,12 +96,12 @@ function ProductCard({
         <Star size={11} fill="#FFA500" color="#FFA500" />
         <span style={{ fontSize: "11px", color: "#666" }}>{rating}</span>
       </div>
-      <div style={{ fontSize: "13px", color: "#1A1A1A", marginBottom: "6px", lineHeight: 1.3 }}>
+      <div style={{ fontSize: "13px", color: "#1A1A1A", marginBottom: "6px", lineHeight: 1.3, minHeight: "50px" }}>
         {name}
         <span style={{ color: "#8E8E93", fontSize: "11px" }}> {unit}</span>
       </div>
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="flex items-center justify-between" style={{ marginTop: "auto" }}>
+        <div style={{ minHeight: "42px" }}>
           {oldPrice && (
             <div style={{ fontSize: "11px", color: "#8E8E93", textDecoration: "line-through" }}>
               {oldPrice} ₽
@@ -133,6 +132,92 @@ function ProductCard({
   );
 }
 
+function PersonalPromosBlock({ tone = "orange" }: { tone?: "orange" | "green" }) {
+  const isGreen = tone === "green";
+  const border = isGreen ? "#D4EFD9" : "#EFEFF4";
+  const accent = isGreen ? "#2CB248" : "#FF6A22";
+  const bg = isGreen ? "#EFFAF2" : "#FFF6F1";
+
+  const promoCards = [
+    {
+      icon: Sparkles,
+      title: "Персональные предложения",
+      text: "Акции только для вас: отдельно для Апельсиновой карты и сервисов Перекрёстка/Пятёрочки.",
+    },
+    {
+      icon: Gift,
+      title: "Эксклюзивные товары за рубль",
+      text: "Подборка ограниченных товаров за 1 ₽ для участников.",
+    },
+    {
+      icon: Gamepad2,
+      title: "Игры при ожидании заказа",
+      text: "Мини-игры с бонусами, пока заказ в сборке.",
+    },
+    {
+      icon: Coffee,
+      title: "Каждый 4 кофе + выпечка бесплатно",
+      text: "Покупай по карте и получай каждый 4 набор free.",
+    },
+    {
+      icon: Tag,
+      title: "2+1 от рекомендательной системы",
+      text: "Персональная механика 2+1 на товары из рекомендаций.",
+    },
+    {
+      icon: Users,
+      title: "Приведи друга",
+      text: "Получите обоюдные бонусы после первой покупки друга.",
+    },
+  ];
+
+  return (
+    <div style={{ background: "white", borderRadius: "18px", border: `1px solid ${border}`, marginBottom: "16px", padding: "10px" }}>
+      <div style={{ background: bg, borderRadius: "12px", padding: "10px", marginBottom: "10px", fontSize: "12px", color: "#444" }}>
+        Персональная лента предложений формируется под ваш профиль и активность в сервисах.
+      </div>
+      <div style={{ display: "grid", gap: "8px" }}>
+        {promoCards.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div
+              key={item.title}
+              style={{
+                background: "#FCFCFE",
+                border: "1px solid #F0F1F6",
+                borderRadius: "12px",
+                padding: "10px",
+                display: "flex",
+                gap: "10px",
+                alignItems: "flex-start",
+              }}
+            >
+              <div
+                style={{
+                  width: "34px",
+                  height: "34px",
+                  borderRadius: "10px",
+                  background: bg,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <Icon size={17} color={accent} />
+              </div>
+              <div>
+                <div style={{ fontSize: "13px", fontWeight: 700, color: "#1A1A1A", lineHeight: 1.2 }}>{item.title}</div>
+                <div style={{ fontSize: "12px", color: "#60606B", marginTop: "2px", lineHeight: 1.28 }}>{item.text}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function PyaterochkaSection() {
   return (
     <div>
@@ -148,7 +233,7 @@ function PyaterochkaSection() {
         }}
       >
         <img
-          src={STRAWBERRY_IMG}
+          src={COFFEE_BANNER_IMG}
           alt="banner"
           style={{
             position: "absolute",
@@ -175,35 +260,19 @@ function PyaterochkaSection() {
           >
             До -40%
           </div>
-          <div style={{ color: "white", fontSize: "18px", fontWeight: 800, lineHeight: 1.2, maxWidth: "55%" }}>
-            Для любых майских идей
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: "12px",
-              right: "50%",
-              background: "white",
-              color: "#1A1A1A",
-              fontSize: "11px",
-              fontWeight: 700,
-              padding: "4px 10px",
-              borderRadius: "20px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Только в доставке
+          <div style={{ color: "white", fontSize: "14px", fontWeight: 800, lineHeight: 1.1, maxWidth: "44%", overflowWrap: "anywhere", wordBreak: "break-word" }}>
+            Оформи карту Апельсин и получи каждое 4 кофе или выпечку бесплатно
           </div>
         </div>
       </div>
 
-      {/* Быстрые действия */}
+      {/* Еженедельные акции */}
       <div className="grid grid-cols-4 gap-2 mb-4">
         {[
-          { icon: <ListChecks size={22} color="#FF6A22" />, label: "История покупок" },
-          { icon: <Star size={22} color="#FF6A22" />, label: "Оценка товаров" },
-          { icon: <Heart size={22} color="#FF6A22" />, label: "Моя экономия" },
-          { icon: <Shield size={22} color="#FF6A22" />, label: "Шпионский клуб" },
+          { icon: <Tag size={22} color="#FF6A22" />, label: "Еженедельные акции Пятёрочка" },
+          { icon: <Tag size={22} color="#FF6A22" />, label: "Еженедельные акции Перекрёсток" },
+          { icon: <Tag size={22} color="#FF6A22" />, label: "Еженедельные акции Апельсин-карты" },
+          { icon: <Tag size={22} color="#FF6A22" />, label: "Еженедельные акции партнёров" },
         ].map((item, i) => (
           <button
             key={i}
@@ -233,10 +302,13 @@ function PyaterochkaSection() {
         className="flex gap-3 pb-2 mb-4"
         style={{ overflowX: "auto", scrollbarWidth: "none" }}
       >
-        <ProductCard img={CUCUMBER_IMG} name="Огурцы Атлет" price="249" oldPrice="349" unit="за кг" rating={4.9} discount={29} />
-        <ProductCard img={CHIPS_IMG} name="Чипсы Lay's Нежный сыр" price="119" oldPrice="159" unit="за шт" rating={4.7} discount={25} />
-        <ProductCard img={BLUEBERRY_IMG} name="Голубика свежая" price="179" oldPrice="239" unit="за упак" rating={4.9} discount={25} />
+        <ProductCard img="/items/pyaterochka/razor.jpg" name="Бритвы Красная цена одноразовые мужские" price="159" oldPrice="229" unit="5 шт" rating={4.7} discount={31} />
+        <ProductCard img="/items/pyaterochka/cheese.jpg" name="Сыр EmandHof Hard Экстра колотый" price="249" oldPrice="339" unit="за упак" rating={4.8} discount={27} />
+        <ProductCard img="/items/pyaterochka/beans.jpg" name="Фасоль Global Village белая" price="99" oldPrice="139" unit="450 г" rating={4.9} discount={29} />
       </div>
+
+      <SectionTitle title="Акции только для вас" />
+      <PersonalPromosBlock tone="orange" />
 
       {/* Список покупок */}
       <SectionTitle title="Список покупок" action="+ добавить" />
@@ -319,7 +391,7 @@ function PerekrestokSection() {
         }}
       >
         <img
-          src={TOMATO_IMG}
+          src="/items/perekrestok/pasta.jpg"
           alt="banner"
           style={{
             position: "absolute",
@@ -346,24 +418,8 @@ function PerekrestokSection() {
           >
             До -40%
           </div>
-          <div style={{ color: "white", fontSize: "18px", fontWeight: 800, lineHeight: 1.2, maxWidth: "55%" }}>
-            Свежие овощи и фрукты
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: "12px",
-              right: "50%",
-              background: "white",
-              color: "#1A1A1A",
-              fontSize: "11px",
-              fontWeight: 700,
-              padding: "4px 10px",
-              borderRadius: "20px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Только в доставке
+          <div style={{ color: "white", fontSize: "14px", fontWeight: 800, lineHeight: 1.1, maxWidth: "44%", overflowWrap: "anywhere", wordBreak: "break-word" }}>
+            Оформи карту Апельсин и получи каждое 4 кофе или выпечку бесплатно
           </div>
         </div>
       </div>
@@ -411,10 +467,13 @@ function PerekrestokSection() {
         className="flex gap-3 pb-2 mb-4"
         style={{ overflowX: "auto", scrollbarWidth: "none" }}
       >
-        <ProductCard img={CUCUMBER_IMG} name="Огурцы Атлет" price="249" oldPrice="349" unit="за кг" rating={4.9} discount={28} green />
-        <ProductCard img={CHIPS_IMG} name="Чипсы Lay's Нежный сыр" price="119" oldPrice="159" unit="за шт" rating={4.7} discount={25} green />
-        <ProductCard img={BLUEBERRY_IMG} name="Голубика свежая" price="179" oldPrice="239" unit="за упак" rating={4.9} discount={25} green />
+        <ProductCard img="/items/perekrestok/pasta.jpg" name="Паста Перекрёсток Select Карбонара" price="239" oldPrice="329" unit="за упак" rating={4.8} discount={27} green />
+        <ProductCard img="/items/perekrestok/tvorog.jpg" name="Творог 5% Зелёная Линия" price="119" oldPrice="159" unit="за шт" rating={4.9} discount={25} green />
+        <ProductCard img="/items/perekrestok/mozzarella.jpg" name="Сыр Galbani Моцарелла 45%" price="229" oldPrice="299" unit="за упак" rating={4.7} discount={23} green />
       </div>
+
+      <SectionTitle title="Акции только для вас" />
+      <PersonalPromosBlock tone="green" />
 
       {/* Доставка */}
       <div
@@ -492,10 +551,11 @@ function PartnersSection() {
       icon: (
         <div style={{
           width: "44px", height: "44px",
-          background: "#EF3124", borderRadius: "14px",
-          display: "flex", alignItems: "center", justifyContent: "center",
+          borderRadius: "14px",
+          overflow: "hidden",
+          background: "#EF3124",
         }}>
-          <span style={{ color: "white", fontSize: "22px", fontWeight: 900, fontFamily: "Georgia, serif", lineHeight: 1 }}>А</span>
+          <img src={ALFA_BANK_LOGO} alt="Альфа-Банк" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
       ),
       name: "Альфа-Банк",
@@ -508,13 +568,11 @@ function PartnersSection() {
       icon: (
         <div style={{
           width: "44px", height: "44px",
-          background: "#EF3124", borderRadius: "14px",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexDirection: "column" as const,
-          gap: "0px",
+          borderRadius: "14px",
+          overflow: "hidden",
+          background: "#EF3124",
         }}>
-          <span style={{ color: "white", fontSize: "17px", fontWeight: 900, fontFamily: "Georgia, serif", lineHeight: 1 }}>А</span>
-          <span style={{ color: "rgba(255,255,255,0.85)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.5px", lineHeight: 1 }}>СТРАХ</span>
+          <img src={ALFA_STRAH_LOGO} alt="Альфа-Страхование" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
       ),
       name: "Альфа-Страхование",
@@ -527,23 +585,11 @@ function PartnersSection() {
       icon: (
         <div style={{
           width: "44px", height: "44px",
-          background: "#FFD102", borderRadius: "14px",
-          display: "flex", alignItems: "center", justifyContent: "center",
+          borderRadius: "14px",
           overflow: "hidden",
-          position: "relative" as const,
+          background: "#FFD102",
         }}>
-          {/* Билайн — полосатый фирменный стиль */}
-          {[0,1,2,3,4].map(i => (
-            <div key={i} style={{
-              position: "absolute",
-              top: 0, bottom: 0,
-              left: `${i * 9}px`,
-              width: "5px",
-              background: i % 2 === 0 ? "#1A1A1A" : "transparent",
-              opacity: 0.15,
-            }} />
-          ))}
-          <span style={{ color: "#1A1A1A", fontSize: "11px", fontWeight: 900, letterSpacing: "-0.5px", position: "relative", zIndex: 1 }}>beeline</span>
+          <img src={BEELINE_LOGO} alt="Билайн" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
       ),
       name: "Билайн",
@@ -610,19 +656,19 @@ function ChizhikSection() {
       {/* Предупреждение */}
       <div
         style={{
-          background: "#EFF7F0",
+          background: "#FFF4EC",
           borderRadius: "20px",
           padding: "20px 16px",
           textAlign: "center",
           marginBottom: "16px",
-          border: "1px solid #C8E6C9",
+          border: "1px solid #FFD6BF",
         }}
       >
         <div
           style={{
             width: "60px",
             height: "60px",
-            background: "#2CB248",
+            background: "#FF7A33",
             borderRadius: "20px",
             display: "flex",
             alignItems: "center",
@@ -630,12 +676,7 @@ function ChizhikSection() {
             margin: "0 auto 12px",
           }}
         >
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4C16 4 8 8 8 16C8 20.4 11.6 24 16 24C20.4 24 24 20.4 24 16C24 8 16 4 16 4Z" fill="white" opacity="0.9" />
-            <circle cx="13" cy="15" r="2" fill="#2CB248" />
-            <circle cx="19" cy="15" r="2" fill="#2CB248" />
-            <path d="M12 19C13.5 20.5 18.5 20.5 20 19" stroke="#2CB248" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          <Tag size={24} color="white" />
         </div>
         <div style={{ fontWeight: 700, fontSize: "16px", color: "#1A1A1A", marginBottom: "6px" }}>
           Карта Чижика — отдельная система
@@ -663,7 +704,7 @@ function ChizhikSection() {
           style={{
             width: "52px",
             height: "52px",
-            background: "#EFF7F0",
+            background: "#FFF4EC",
             borderRadius: "16px",
             display: "flex",
             alignItems: "center",
@@ -671,7 +712,7 @@ function ChizhikSection() {
             flexShrink: 0,
           }}
         >
-          <Tag size={24} color="#2CB248" />
+          <Tag size={24} color="#FF7A33" />
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 700, fontSize: "15px", color: "#1A1A1A" }}>Низкие цены каждый день</div>
@@ -683,20 +724,20 @@ function ChizhikSection() {
       {/* Персональные акции */}
       <div
         style={{
-          background: "#F0FAF3",
+          background: "#FFF7F2",
           borderRadius: "18px",
           padding: "14px 16px",
           display: "flex",
           alignItems: "center",
           gap: "12px",
-          border: "1px solid #D4EFD9",
+          border: "1px solid #FFDCC9",
         }}
       >
         <div
           style={{
             width: "52px",
             height: "52px",
-            background: "#2CB248",
+            background: "#FF7A33",
             borderRadius: "16px",
             display: "flex",
             alignItems: "center",
