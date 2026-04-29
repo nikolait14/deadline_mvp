@@ -12,7 +12,8 @@ type TabId = "pyat" | "perek" | "partners" | "chizhik";
 type NavId = "home" | "catalog" | "cart" | "promos" | "profile";
 
 export default function App() {
-  const [balance, setBalance] = useState(1250);
+  const [bonusBalance] = useState(1250);
+  const [cardBalance, setCardBalance] = useState(12450);
   const [activeTab, setActiveTab] = useState<TabId>("pyat");
   const [activeNav, setActiveNav] = useState<NavId>("home");
 
@@ -60,11 +61,13 @@ export default function App() {
               {/* Card zone – white bg */}
               <div style={{ background: "white" }}>
                 <ApelsinCard
-                  balance={balance}
-                  setBalance={setBalance}
+                  bonusBalance={bonusBalance}
+                  cardBalance={cardBalance}
                   dimmed={isDimmed}
                 />
-                <QRPaySection />
+                <QRPaySection
+                  onTopUp={(amount) => setCardBalance((prev) => prev + amount)}
+                />
                 <StoreTabs activeTab={activeTab} setActiveTab={setActiveTab} />
               </div>
 

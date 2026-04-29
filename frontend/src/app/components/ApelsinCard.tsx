@@ -1,21 +1,17 @@
-import { CreditCard, Plus, Minus, QrCode, ChevronRight, Zap } from "lucide-react";
+import { CreditCard, Zap } from "lucide-react";
 
 const APELSIN_LOGO_DATA_URL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAP1BMVEX//wD2YQD1YQD3YQD3YAD4YQD3YQD3YQD3XQD3YAD3YQD5kk/93Mf7rHn///74dB//8+v9zq/4hDr7upD5eypJIxdJAAAACnRSTlMAIna83u3zkv4gcShIkwAAAL5JREFUOMutk8kCwiAMRMMSGoPY9f+/1da2QqiGg86RPMKSGYBVxjqPgQsF9M4aOGSRPwrtXu/4q7rXfla09jCoAWj0BlsLpwMOvA54QB1ACDoQgH8E+G8AUV04V3aA4v2iSCWQHhclAcQrIDv0Q10fehKXHGtgJPmKqQYmCTDNsj7T+dXvYYlDxjyLPO6ix1yMOxtm/a1je6TCMIXliJeYUlyYSstZOYBN0rQN29/awWlHrx3eM/7hfTsKOf5Pp6onNCM5mToAAAAASUVORK5CYII=";
 
 interface ApelsinCardProps {
-  balance: number;
-  setBalance: (b: number) => void;
+  bonusBalance: number;
+  cardBalance: number;
   dimmed: boolean;
 }
 
-export function ApelsinCard({ balance, setBalance, dimmed }: ApelsinCardProps) {
-  const handleEarn = () => setBalance(balance + 100);
-  const handleSpend = () => {
-    if (balance >= 50) setBalance(balance - 50);
-  };
-
-  const formatted = balance.toLocaleString("ru-RU");
+export function ApelsinCard({ bonusBalance, cardBalance, dimmed }: ApelsinCardProps) {
+  const formatted = bonusBalance.toLocaleString("ru-RU");
+  const formattedCardBalance = cardBalance.toLocaleString("ru-RU");
 
   return (
     <div className="px-4 pt-4 pb-2">
@@ -106,17 +102,35 @@ export function ApelsinCard({ balance, setBalance, dimmed }: ApelsinCardProps) {
           </div>
         </div>
 
-        {/* Баланс */}
+        {/* Балансы */}
         <div style={{ marginBottom: "18px", position: "relative" }}>
+          <div style={{ color: "rgba(255,255,255,0.8)", fontSize: "13px", marginBottom: "2px" }}>
+            Баланс карты
+          </div>
+          <div
+            style={{
+              color: "white",
+              fontSize: "32px",
+              fontWeight: 800,
+              letterSpacing: "-1px",
+              lineHeight: 1.05,
+              marginBottom: "8px",
+            }}
+          >
+            {formattedCardBalance}
+            <span style={{ fontSize: "18px", fontWeight: 500, marginLeft: "6px", letterSpacing: 0 }}>
+              ₽
+            </span>
+          </div>
           <div style={{ color: "rgba(255,255,255,0.8)", fontSize: "13px", marginBottom: "4px" }}>
             Баланс бонусов
           </div>
           <div
             style={{
               color: "white",
-              fontSize: "42px",
+              fontSize: "34px",
               fontWeight: 800,
-              letterSpacing: "-2px",
+              letterSpacing: "-1px",
               lineHeight: 1,
             }}
           >
@@ -125,46 +139,6 @@ export function ApelsinCard({ balance, setBalance, dimmed }: ApelsinCardProps) {
               бонусов
             </span>
           </div>
-        </div>
-
-        {/* Кнопки */}
-        <div className="flex gap-3" style={{ marginBottom: "14px", position: "relative" }}>
-          <button
-            onClick={handleEarn}
-            className="flex items-center justify-center gap-2 flex-1"
-            style={{
-              background: "rgba(255,255,255,0.22)",
-              backdropFilter: "blur(6px)",
-              border: "none",
-              padding: "11px 0",
-              borderRadius: "40px",
-              color: "white",
-              fontWeight: 600,
-              fontSize: "14px",
-              cursor: "pointer",
-            }}
-          >
-            <Plus size={15} strokeWidth={2.5} />
-            Накопить
-          </button>
-          <button
-            onClick={handleSpend}
-            className="flex items-center justify-center gap-2 flex-1"
-            style={{
-              background: "rgba(255,255,255,0.22)",
-              backdropFilter: "blur(6px)",
-              border: "none",
-              padding: "11px 0",
-              borderRadius: "40px",
-              color: "white",
-              fontWeight: 600,
-              fontSize: "14px",
-              cursor: "pointer",
-            }}
-          >
-            <Minus size={15} strokeWidth={2.5} />
-            Списать
-          </button>
         </div>
 
         {/* Футер карты */}

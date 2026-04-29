@@ -6,7 +6,8 @@ interface TabContentProps {
   activeTab: TabId;
 }
 
-const COFFEE_BANNER_IMG = "https://images.unsplash.com/photo-1521017432531-fbd92d768814?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900";
+const COFFEE_BANNER_IMG = "/items/pyaterochka/coffee.jpg";
+const BULOCHKA_BANNER_IMG = "/items/perekrestok/bulochka.jpg";
 const ALFA_BANK_LOGO = "/items/partners/alfa-main.png";
 const ALFA_STRAH_LOGO = "/items/partners/alfa-strah.png";
 const BEELINE_LOGO = "/items/partners/beeline.jpg";
@@ -258,7 +259,7 @@ function PyaterochkaSection() {
               marginBottom: "8px",
             }}
           >
-            До -40%
+            Акция
           </div>
           <div style={{ color: "white", fontSize: "14px", fontWeight: 800, lineHeight: 1.1, maxWidth: "44%", overflowWrap: "anywhere", wordBreak: "break-word" }}>
             Оформи карту Апельсин и получи каждое 4 кофе или выпечку бесплатно
@@ -391,7 +392,7 @@ function PerekrestokSection() {
         }}
       >
         <img
-          src="/items/perekrestok/pasta.jpg"
+          src={BULOCHKA_BANNER_IMG}
           alt="banner"
           style={{
             position: "absolute",
@@ -416,7 +417,7 @@ function PerekrestokSection() {
               marginBottom: "8px",
             }}
           >
-            До -40%
+            Акция
           </div>
           <div style={{ color: "white", fontSize: "14px", fontWeight: 800, lineHeight: 1.1, maxWidth: "44%", overflowWrap: "anywhere", wordBreak: "break-word" }}>
             Оформи карту Апельсин и получи каждое 4 кофе или выпечку бесплатно
