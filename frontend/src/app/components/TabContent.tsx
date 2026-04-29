@@ -158,7 +158,7 @@ function PersonalPromosBlock({ tone = "orange" }: { tone?: "orange" | "green" })
     {
       icon: Coffee,
       title: "Каждый 4 кофе + выпечка бесплатно",
-      text: "Покупай по карте и получай каждый 4 набор free.",
+      text: "Покупай по карте и получай каждый 4 набор бесплатно.",
     },
     {
       icon: Tag,
